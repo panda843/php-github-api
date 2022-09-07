@@ -40,9 +40,9 @@ class Search extends AbstractApi
      *
      * @return array list of issues found
      */
-    public function issues($q, $sort = 'updated', $order = 'desc')
+    public function issues($q, $page=1, $perPage=100, $sort = 'updated', $order = 'desc')
     {
-        return $this->get('/search/issues', ['q' => $q, 'sort' => $sort, 'order' => $order]);
+        return $this->get('/search/issues', ['q' => $q, 'sort' => $sort, 'order' => $order,'page' => $page,'per_page' => $perPage]);
     }
 
     /**
@@ -56,9 +56,9 @@ class Search extends AbstractApi
      *
      * @return array list of code found
      */
-    public function code($q, $sort = 'updated', $order = 'desc')
+    public function code($q, $page=1, $perPage=100, $sort = 'updated', $order = 'desc')
     {
-        return $this->get('/search/code', ['q' => $q, 'sort' => $sort, 'order' => $order]);
+        return $this->get('/search/code', ['q' => $q, 'sort' => $sort, 'order' => $order,'page' => $page,'per_page' => $perPage]);
     }
 
     /**
@@ -69,11 +69,11 @@ class Search extends AbstractApi
      *
      * @return array list of code found
      */
-    public function codeWithMatch(string $q, string $sort = 'updated', string $order = 'desc'): array
+    public function codeWithMatch(string $q, $page=1, $perPage=100, string $sort = 'updated', string $order = 'desc'): array
     {
         $this->acceptHeaderValue = 'application/vnd.github.v3.text-match+json';
 
-        return $this->code($q, $sort, $order);
+        return $this->code($q, $page, $perPage, $sort, $order);
     }
 
     /**
